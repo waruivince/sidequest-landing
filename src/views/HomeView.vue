@@ -357,19 +357,19 @@ footer h2 {
   background-position: center;
 }
 .black {
-  background: url("../assets/images/black.png") center/cover;
+  background: url("../assets/images/black.webp") center/cover;
 }
 .nature {
-  background-image: url("../assets/images/nature.png");
+  background-image: url("../assets/images/nature.webp");
 }
 .existed {
-  background-image: url("../assets/images/existed.png");
+  background-image: url("../assets/images/existed.webp");
 }
 .concert {
-  background-image: url("../assets/images/concert.png");
+  background-image: url("../assets/images/concert.webp");
 }
 .ride {
-  background-image: url("../assets/images/ride.png");
+  background-image: url("../assets/images/ride.webp");
 }
 .never-forget {
   background-image: url("../assets/images/never-forget.png");
