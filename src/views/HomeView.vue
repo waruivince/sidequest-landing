@@ -33,13 +33,14 @@
     </section>
     <section id="explore" class="experience-scroll">
       <div class="experience">
-        <div
-          v-for="(image, index) in images"
-          :key="image"
+        <img
+          v-for="(img, index) in imageList"
+          :key="img.name"
+          :src="img.src"
+          :alt="img.name"
           class="experience-image"
-          :class="image"
           :style="imageStyle(index)"
-        ></div>
+        />
         <div class="shade"></div>
         <div class="experience-copy">
           <h2>See what<br />experiences can<br />do to a life.</h2>
@@ -161,7 +162,14 @@ export default class HomeView extends Vue {
   whyActive = false;
   prelaunchActive = false;
   footerActive = false;
-  images = ["black", "nature", "existed", "concert", "ride", "never-forget"];
+  imageList = [
+    { name: "black", src: require("../assets/images/black.webp") },
+    { name: "nature", src: require("../assets/images/nature.webp") },
+    { name: "existed", src: require("../assets/images/existed.webp") },
+    { name: "concert", src: require("../assets/images/concert.webp") },
+    { name: "ride", src: require("../assets/images/ride.webp") },
+    { name: "never-forget", src: require("../assets/images/never-forget.png") },
+  ];
   phrases = [
     { text: "A walk you almost didn't take.", at: 1 / 6 },
     { text: "A place you didn't know existed.", at: 2 / 6 },
@@ -177,9 +185,16 @@ export default class HomeView extends Vue {
     return active;
   }
   mounted(): void {
+    this.preloadImages();
     window.addEventListener("scroll", this.handleScroll, { passive: true });
     window.addEventListener("resize", this.handleScroll);
     this.handleScroll();
+  }
+  preloadImages(): void {
+    this.imageList.forEach((img) => {
+      const imageElement = new Image();
+      imageElement.src = img.src;
+    });
   }
   beforeDestroy(): void {
     window.removeEventListener("scroll", this.handleScroll);
@@ -353,26 +368,13 @@ footer h2 {
   inset: 0;
 }
 .experience-image {
-  background-size: cover;
-  background-position: center;
-}
-.black {
-  background: url("../assets/images/black.webp") center/cover;
-}
-.nature {
-  background-image: url("../assets/images/nature.webp");
-}
-.existed {
-  background-image: url("../assets/images/existed.webp");
-}
-.concert {
-  background-image: url("../assets/images/concert.webp");
-}
-.ride {
-  background-image: url("../assets/images/ride.webp");
-}
-.never-forget {
-  background-image: url("../assets/images/never-forget.png");
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.1s ease-out;
 }
 .shade {
   background: linear-gradient(
